@@ -46,6 +46,78 @@ func (p *SubUserClient) CreateSubUser(request subuser.CreateSubUserRequest) ([]s
 	return nil, errors.New(postResp)
 }
 
+// CreateAPIKey Parent user query to create the API key of the sub user
+func (p *SubUserClient) CreateAPIKey(request subuser.CreateAPIKeyRequest) (*subuser.APIKeyData, error) {
+	postBody, jsonErr := model.ToJson(request)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/v2/sub-user/api-key-generation", nil)
+	postResp, postErr := internal.HttpPost(url, postBody)
+	if postErr != nil {
+		return nil, postErr
+	}
+
+	result := subuser.CreateAPIKeyResponse{}
+	jsonErr = json.Unmarshal([]byte(postResp), &result)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+	if result.Code != 200 {
+		return nil, errors.New(postResp)
+	}
+	return result.Data, nil
+}
+
+// ModifyAPIKey Parent user query to modify the API key of the sub user
+func (p *SubUserClient) ModifyAPIKey(request subuser.ModifyAPIKeyRequest) (*subuser.APIKeyData, error) {
+	postBody, jsonErr := model.ToJson(request)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/v2/sub-user/api-key-modification", nil)
+	postResp, postErr := internal.HttpPost(url, postBody)
+	if postErr != nil {
+		return nil, postErr
+	}
+
+	result := subuser.CreateAPIKeyResponse{}
+	jsonErr = json.Unmarshal([]byte(postResp), &result)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+	if result.Code != 200 {
+		return nil, errors.New(postResp)
+	}
+	return result.Data, nil
+}
+
+// DeleteAPIKey Parent user query to delete the API key of the sub user
+func (p *SubUserClient) DeleteAPIKey(request subuser.DeleteAPIKeyRequest) error {
+	postBody, jsonErr := model.ToJson(request)
+	if jsonErr != nil {
+		return jsonErr
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/v2/sub-user/api-key-deletion", nil)
+	postResp, postErr := internal.HttpPost(url, postBody)
+	if postErr != nil {
+		return postErr
+	}
+
+	result := subuser.DeleteAPIKeyResponse{}
+	jsonErr = json.Unmarshal([]byte(postResp), &result)
+	if jsonErr != nil {
+		return jsonErr
+	}
+	if result.Code != 200 {
+		return errors.New(postResp)
+	}
+	return nil
+}
+
 // Lock or unlock a specific user
 func (p *SubUserClient) SubUserManagement(request subuser.SubUserManagementRequest) (*subuser.SubUserManagement, error) {
 	postBody, jsonErr := model.ToJson(request)
