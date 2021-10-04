@@ -221,7 +221,6 @@ func (p *AccountClient) FuturesTransfer(request account.FuturesTransferRequest) 
 	return result.Data, nil
 }
 
-
 // Returns the point balance of specified user's account
 func (p *AccountClient) GetPointBalance(subUid string) (*account.GetPointBalanceResponse, error) {
 	request := new(model.GetRequest).Init()

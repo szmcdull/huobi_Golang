@@ -67,7 +67,6 @@ func (p *WalletClient) GetWithdrawQuota(currency string) (*wallet.WithdrawQuota,
 	return nil, errors.New(getResp)
 }
 
-
 //  Parent user to query withdraw address available for API key
 func (p *WalletClient) GetWithdrawAddress(request *model.GetRequest) (*wallet.GetWithdrawAddressResponse, error) {
 	url := p.privateUrlBuilder.Build("GET", "/v2/account/withdraw/address", request)

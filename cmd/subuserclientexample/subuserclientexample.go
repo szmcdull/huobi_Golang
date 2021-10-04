@@ -22,7 +22,6 @@ func RunAllExamples() {
 	getUid()
 }
 
-
 func createSubUser() {
 	client := new(client.SubUserClient).Init(config.AccessKey, config.SecretKey, config.Host)
 	request := subuser.CreateSubUserRequest{
@@ -68,9 +67,9 @@ func unlockSubUser() {
 func setSubUserTradbleMarket() {
 	client := new(client.SubUserClient).Init(config.AccessKey, config.SecretKey, config.Host)
 	request := subuser.SetSubUserTradableMarketRequest{
-		SubUids: config.SubUids,
+		SubUids:     config.SubUids,
 		AccountType: "isolated-margin",
-		Activation: "deactivated",
+		Activation:  "deactivated",
 	}
 	resp, err := client.SetSubUserTradableMarket(request)
 	if err != nil {
@@ -82,9 +81,9 @@ func setSubUserTradbleMarket() {
 	}
 
 	request = subuser.SetSubUserTradableMarketRequest{
-		SubUids: config.SubUids,
+		SubUids:     config.SubUids,
 		AccountType: "isolated-margin",
-		Activation: "activated",
+		Activation:  "activated",
 	}
 	resp, err = client.SetSubUserTradableMarket(request)
 	if err != nil {
@@ -96,12 +95,11 @@ func setSubUserTradbleMarket() {
 	}
 }
 
-
 func setSubUserTransferability() {
 	client := new(client.SubUserClient).Init(config.AccessKey, config.SecretKey, config.Host)
 	request := subuser.SetSubUserTransferabilityRequest{
-		SubUids: config.SubUids,
-		AccountType: "spot",
+		SubUids:       config.SubUids,
+		AccountType:   "spot",
 		Transferrable: false,
 	}
 	resp, err := client.SetSubUserTransferability(request)
@@ -114,8 +112,8 @@ func setSubUserTransferability() {
 	}
 
 	request = subuser.SetSubUserTransferabilityRequest{
-		SubUids: config.SubUids,
-		AccountType: "spot",
+		SubUids:       config.SubUids,
+		AccountType:   "spot",
 		Transferrable: true,
 	}
 	resp, err = client.SetSubUserTransferability(request)

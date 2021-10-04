@@ -142,7 +142,6 @@ func (p *SubUserClient) SubUserManagement(request subuser.SubUserManagementReque
 	return result.Data, nil
 }
 
-
 // Set Tradable Market for Sub Users
 func (p *SubUserClient) SetSubUserTradableMarket(request subuser.SetSubUserTradableMarketRequest) ([]subuser.TradableMarket, error) {
 	postBody, jsonErr := model.ToJson(request)
@@ -331,4 +330,24 @@ func (p *SubUserClient) GetUid() (int64, error) {
 		return result.Data, nil
 	}
 	return 0, errors.New(getResp)
+}
+
+func (p *SubUserClient) GetSubUsersAccountList(subUid int64) (*subuser.AccountData, error) {
+	request := new(model.GetRequest).Init()
+	request.AddParam("subUid", strconv.FormatInt(subUid, 10))
+	url := p.privateUrlBuilder.Build("GET", "/v2/sub-user/account-list", request)
+	getResp, getErr := internal.HttpGet(url)
+	if getErr != nil {
+		return nil, getErr
+	}
+
+	result := subuser.GetSubUsersAccountListResponse{}
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+	if result.Code == 200 && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(getResp)
 }

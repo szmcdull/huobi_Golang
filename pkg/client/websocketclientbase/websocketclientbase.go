@@ -15,7 +15,7 @@ const (
 	TimerIntervalSecond = 5
 	ReconnectWaitSecond = 60
 
-	wsPath = "/ws"
+	wsPath   = "/ws"
 	feedPath = "/feed"
 )
 

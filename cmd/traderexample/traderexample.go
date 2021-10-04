@@ -12,7 +12,6 @@ func RunAllExamples() {
 	subMultipleBBO()
 }
 
-
 func subMultipleBBO() {
 	client := new(marketwebsocketclient.BestBidOfferWebSocketClient).Init(config.Host)
 
