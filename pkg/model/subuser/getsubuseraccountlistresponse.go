@@ -7,13 +7,13 @@ type GetSubUsersAccountListResponse struct {
 }
 
 type AccountData struct {
-	Uid        int        `json:"uid"`
+	Uid        int64      `json:"uid"`
 	DeductMode string     `json:"deductMode"`
 	List       []*Account `json:"list,omitempty"`
 }
 
 type AccountId struct {
-	AccountId     int    `json:"accountId"`
+	AccountId     int64  `json:"accountId"`
 	AccountStatus string `json:"accountStatus"`
 }
 
