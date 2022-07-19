@@ -8,8 +8,8 @@ type CrossLinearSwapUserAccountInfoResponse struct {
 type FuturesContractDetail struct {
 	Symbol           string   `json:"symbol"`
 	ContractCode     string   `json:"contract_code"`
-	MarginPosition   int      `json:"margin_position"`
-	MarginFrozen     int      `json:"margin_frozen"`
+	MarginPosition   float64  `json:"margin_position"`
+	MarginFrozen     float64  `json:"margin_frozen"`
 	MarginAvailable  float64  `json:"margin_available"`
 	ProfitUnreal     int      `json:"profit_unreal"`
 	LiquidationPrice *float64 `json:"liquidation_price"`
@@ -24,8 +24,8 @@ type FuturesContractDetail struct {
 type ContractDetail struct {
 	Symbol           string   `json:"symbol"`
 	ContractCode     string   `json:"contract_code"`
-	MarginPosition   int      `json:"margin_position"`
-	MarginFrozen     int      `json:"margin_frozen"`
+	MarginPosition   float64  `json:"margin_position"`
+	MarginFrozen     float64  `json:"margin_frozen"`
 	MarginAvailable  float64  `json:"margin_available"`
 	ProfitUnreal     int      `json:"profit_unreal"`
 	LiquidationPrice *float64 `json:"liquidation_price"`
@@ -45,7 +45,7 @@ type CrossLinearSwapUserAccountInfo struct {
 	MarginBalance         float64                  `json:"margin_balance"`
 	MarginStatic          float64                  `json:"margin_static"`
 	MarginPosition        float64                  `json:"margin_position"`
-	MarginFrozen          int                      `json:"margin_frozen"`
+	MarginFrozen          float64                  `json:"margin_frozen"`
 	ProfitReal            float64                  `json:"profit_real"`
 	ProfitUnreal          float64                  `json:"profit_unreal"`
 	WithdrawAvailable     float64                  `json:"withdraw_available"`
