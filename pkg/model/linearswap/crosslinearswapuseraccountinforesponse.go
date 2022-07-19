@@ -27,7 +27,7 @@ type ContractDetail struct {
 	MarginPosition   float64  `json:"margin_position"`
 	MarginFrozen     float64  `json:"margin_frozen"`
 	MarginAvailable  float64  `json:"margin_available"`
-	ProfitUnreal     int      `json:"profit_unreal"`
+	ProfitUnreal     float64  `json:"profit_unreal"`
 	LiquidationPrice *float64 `json:"liquidation_price"`
 	LeverRate        int      `json:"lever_rate"`
 	AdjustFactor     float64  `json:"adjust_factor"`
