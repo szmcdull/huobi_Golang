@@ -1,6 +1,6 @@
 package linearswap
 
-type AccountFinancialRecord struct {
+type CrossLinearSwapAccountFinancialRecord struct {
 	Id                int64   `json:"id"`
 	Ts                int64   `json:"ts"`
 	Asset             string  `json:"asset"`
