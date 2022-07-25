@@ -61,3 +61,23 @@ func (p *LinearSwapClient) QueryUserAccountInfo(request *linearswap.CrossLinearS
 	}
 	return nil, errors.New(postResp)
 }
+
+func (p *LinearSwapClient) QueryAccountFinancialRecords(request *linearswap.AccountFinancialRecordsRequest) (resp *linearswap.AccountFinancialRecordsData, err error) {
+	var postBody string
+	if postBody, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_financial_record", nil)
+	var postResp string
+	if postResp, err = internal.HttpPost(url, postBody); err != nil {
+		return
+	}
+	result := new(linearswap.AccountFinancialRecordsResponse)
+	if err = json.Unmarshal([]byte(postResp), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(postResp)
+}
