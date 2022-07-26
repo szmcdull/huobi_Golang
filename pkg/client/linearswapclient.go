@@ -82,6 +82,26 @@ func (p *LinearSwapClient) QueryAccountFinancialRecords(request *linearswap.Cros
 	return nil, errors.New(postResp)
 }
 
+func (p *LinearSwapClient) QueryAssetsAndPositions(request *linearswap.CrossLinearAssetsAndPositionsRequest) (resp *linearswap.CrossLinearAssetsAndPositionsData, err error) {
+	var postBody string
+	if postBody, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_account_position_info", nil)
+	var postResp string
+	if postResp, err = internal.HttpPost(url, postBody); err != nil {
+		return
+	}
+	result := new(linearswap.CrossLinearAssetsAndPositionsResponse)
+	if err = json.Unmarshal([]byte(postResp), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(postResp)
+}
+
 func (p *LinearSwapClient) SwitchLeverage(request *linearswap.CrossLinearSwapSwitchLeverageRequest) (resp *linearswap.CrossLinearSwapSwitchLeverageResponseData, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
