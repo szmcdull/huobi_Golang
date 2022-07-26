@@ -62,6 +62,7 @@ func (p *LinearSwapClient) QueryUserAccountInfo(request *linearswap.CrossLinearS
 	return nil, errors.New(postResp)
 }
 
+// Returns user's linear financial records.
 func (p *LinearSwapClient) QueryAccountFinancialRecords(request *linearswap.CrossLinearSwapAccountFinancialRecordsRequest) (resp *linearswap.CrossLinearSwapAccountFinancialRecordsData, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
@@ -82,6 +83,7 @@ func (p *LinearSwapClient) QueryAccountFinancialRecords(request *linearswap.Cros
 	return nil, errors.New(postResp)
 }
 
+// Returns user's linear assets and positions.
 func (p *LinearSwapClient) QueryAssetsAndPositions(request *linearswap.CrossLinearAssetsAndPositionsRequest) (resp *linearswap.CrossLinearAssetsAndPositionsInfo, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
@@ -102,6 +104,7 @@ func (p *LinearSwapClient) QueryAssetsAndPositions(request *linearswap.CrossLine
 	return nil, errors.New(postResp)
 }
 
+// Switch leverage of linear positions.
 func (p *LinearSwapClient) SwitchLeverage(request *linearswap.CrossLinearSwapSwitchLeverageRequest) (resp *linearswap.CrossLinearSwapSwitchLeverageResponseData, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
@@ -120,4 +123,104 @@ func (p *LinearSwapClient) SwitchLeverage(request *linearswap.CrossLinearSwapSwi
 		return result.Data, nil
 	}
 	return nil, errors.New(postResp)
+}
+
+// Returns information of user's linear order
+func (p *LinearSwapClient) GetInformationOfOrder(request *linearswap.GetInformationOfOrderRequest) (order []*linearswap.Order, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_order_info", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetInformationOfOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
+// Returns detail information of user's linear order
+func (p *LinearSwapClient) GetDetailInformationOfOrder(request *linearswap.GetDetailInformationOfOrderRequest) (resp *linearswap.DetailInformationOfOrder, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_order_detail", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetDetailInformationOfOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
+// Returns user's linear history order
+func (p *LinearSwapClient) GetHistoryOrders(request *linearswap.GetHistoryOrdersRequest) (resp *linearswap.GetHistoryOrdersData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_hisorders", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetHistoryOrdersResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
+// Returns user's linear history order via multiple fields
+func (p *LinearSwapClient) GetHistoryOrdersViaMultipleFields(request *linearswap.GetHistoryOrdersViaMultipleFieldsRequest) (resp *linearswap.GetHistoryOrdersViaMultipleFieldsData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_hisorders_exact", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetHistoryOrdersViaMultipleFieldsResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
+// Cancel user's linear swap order
+func (p *LinearSwapClient) CancelOrder(request *linearswap.CancelOrderRequest) (resp *linearswap.CancelOrderResult, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_cancel", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.CancelOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
 }
