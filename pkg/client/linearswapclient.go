@@ -82,7 +82,7 @@ func (p *LinearSwapClient) QueryAccountFinancialRecords(request *linearswap.Cros
 	return nil, errors.New(postResp)
 }
 
-func (p *LinearSwapClient) QueryAssetsAndPositions(request *linearswap.CrossLinearAssetsAndPositionsRequest) (resp *linearswap.CrossLinearAssetsAndPositionsData, err error) {
+func (p *LinearSwapClient) QueryAssetsAndPositions(request *linearswap.CrossLinearAssetsAndPositionsRequest) (resp *linearswap.CrossLinearAssetsAndPositionsInfo, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
 		return

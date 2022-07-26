@@ -3,9 +3,9 @@ package linearswap
 type CrossLinearAssetsAndPositionsResponse struct {
 	Status string                             `json:"status"`
 	Ts     int64                              `json:"ts"`
-	Data   *CrossLinearAssetsAndPositionsData `json:"data"`
+	Data   *CrossLinearAssetsAndPositionsInfo `json:"data"`
 }
-type CrossLinearAssetsAndPositionsData struct {
+type CrossLinearAssetsAndPositionsInfo struct {
 	Positions             []*CrossLinearAssetsAndPositionsPosition `json:"positions"`
 	FuturesContractDetail []*ContractDetail                        `json:"futures_contract_detail"`
 	MarginMode            string                                   `json:"margin_mode"`
