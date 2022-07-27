@@ -7,7 +7,7 @@ type GetHistoryOrdersViaMultipleFieldsResponse struct {
 }
 
 type GetHistoryOrdersViaMultipleFieldsData struct {
-	Orders     []*HistoryOrder `json:"orders"`
-	RemainSize int             `json:"remain_size"`
-	NextId     *int64          `json:"next_id"`
+	Orders     []*HistoryOrderMultipleFields `json:"orders"`
+	RemainSize int                           `json:"remain_size"`
+	NextId     *int64                        `json:"next_id"`
 }
