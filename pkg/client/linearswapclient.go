@@ -224,3 +224,22 @@ func (p *LinearSwapClient) CancelOrder(request *linearswap.CancelOrderRequest) (
 	}
 	return nil, errors.New(body)
 }
+
+func (p *LinearSwapClient) PlaceOrder(request *linearswap.PlaceOrderRequest) (resp *linearswap.PlaceOrderData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_order", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.PlaceOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
