@@ -10,3 +10,11 @@ type TransferAccountRequest struct {
 	Currency        string `json:"currency"`
 	Amount          string `json:"amount"`
 }
+
+type TransferAccountRequestV2 struct {
+	From          string  `json:"from"`
+	To            string  `json:"to"`
+	Currency      string  `json:"currency"`
+	Amount        float64 `json:"amount"`
+	MarginAccount string  `json:"margin-account"`
+}

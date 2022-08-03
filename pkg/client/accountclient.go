@@ -112,6 +112,30 @@ func (p *AccountClient) TransferAccount(request account.TransferAccountRequest) 
 	return &result, nil
 }
 
+func (p *AccountClient) TransferAccountV2(request account.TransferAccountRequestV2) (*account.TransferAccountResponseV2, error) {
+	postBody, jsonErr := model.ToJson(request)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/v2/account/transfer", nil)
+	postResp, postErr := internal.HttpPost(url, postBody)
+	if postErr != nil {
+		return nil, postErr
+	}
+
+	result := account.TransferAccountResponseV2{}
+	jsonErr = json.Unmarshal([]byte(postResp), &result)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+	if result.Success {
+		return nil, errors.New(postResp)
+	}
+
+	return &result, nil
+}
+
 // Returns the amount changes of specified user's account
 func (p *AccountClient) GetAccountHistory(accountId string, optionalRequest account.GetAccountHistoryOptionalRequest) ([]account.AccountHistory, error) {
 	request := new(model.GetRequest).Init()

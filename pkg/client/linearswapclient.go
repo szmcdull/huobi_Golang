@@ -243,3 +243,22 @@ func (p *LinearSwapClient) PlaceOrder(request *linearswap.PlaceOrderRequest) (re
 	}
 	return nil, errors.New(body)
 }
+
+func (p *LinearSwapClient) SwitchPositionMode(request *linearswap.SwitchPositionModeRequest) (resp []*linearswap.PositionMode, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_switch_position_mode", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.SwitchPositionModeResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
