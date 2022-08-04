@@ -129,7 +129,7 @@ func (p *AccountClient) TransferAccountV2(request account.TransferAccountRequest
 	if jsonErr != nil {
 		return nil, jsonErr
 	}
-	if result.Success {
+	if !result.Success {
 		return nil, errors.New(postResp)
 	}
 
