@@ -18,4 +18,5 @@ type PlaceOrderRequest struct {
 	SlTriggerPrice   *float64 `json:"sl_trigger_price"`
 	SlOrderPrice     *float64 `json:"sl_order_price"`
 	SlOrderPriceType *string  `json:"sl_order_price_type"`
+	ChannelCode      *string  `json:"channel_code"`
 }
