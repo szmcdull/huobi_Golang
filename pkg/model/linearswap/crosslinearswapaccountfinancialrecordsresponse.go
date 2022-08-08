@@ -11,3 +11,15 @@ type CrossLinearSwapAccountFinancialRecordsData struct {
 	TotalSize        int                                      `json:"total_size"`
 	FinancialRecords []*CrossLinearSwapAccountFinancialRecord `json:"financial_record"`
 }
+
+type CrossLinearSwapAccountFinancialRecordsViaMultipleFieldsResponse struct {
+	Status string                                                       `json:"status"`
+	Ts     int64                                                        `json:"ts"`
+	Data   *CrossLinearSwapAccountFinancialRecordsViaMultipleFieldsData `json:"data"`
+}
+
+type CrossLinearSwapAccountFinancialRecordsViaMultipleFieldsData struct {
+	FinancialRecords []*CrossLinearSwapAccountFinancialRecord `json:"financial_record"`
+	RemainSize       int                                      `json:"remain_size"`
+	NextId           interface{}                              `json:"next_id"`
+}
