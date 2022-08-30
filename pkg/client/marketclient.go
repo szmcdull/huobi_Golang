@@ -135,6 +135,7 @@ func (client *MarketClient) GetLatestTrade(symbol string) (*market.TradeTick, er
 
 	request := new(model.GetRequest).Init()
 	request.AddParam("symbol", symbol)
+	request.AddParam("contract_code", symbol)
 
 	url := client.publicUrlBuilder.Build("/market/trade", request)
 	getResp, getErr := internal.HttpGet(url)
@@ -160,6 +161,8 @@ func (client *MarketClient) GetHistoricalTrade(symbol string, optionalRequest ma
 
 	request := new(model.GetRequest).Init()
 	request.AddParam("symbol", symbol)
+	request.AddParam("contract_code", symbol)
+	
 	if optionalRequest.Size != 0 {
 		request.AddParam("size", strconv.Itoa(optionalRequest.Size))
 	}
