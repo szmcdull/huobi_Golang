@@ -14,7 +14,7 @@ type Order struct {
 	Offset          string   `json:"offset"`
 	LeverRate       int      `json:"lever_rate"`
 	OrderId         int64    `json:"order_id"`
-	ClientOrderId   *string  `json:"client_order_id"`
+	ClientOrderId   *int64   `json:"client_order_id"`
 	CreatedAt       int64    `json:"created_at"`
 	TradeVolume     float64  `json:"trade_volume"`
 	TradeTurnover   float64  `json:"trade_turnover"`
