@@ -28,7 +28,7 @@ type HistoryOrderMultipleFields struct {
 	FeeAsset        string  `json:"fee_asset"`
 	LiquidationType string  `json:"liquidation_type"`
 	IsTpsl          int     `json:"is_tpsl"`
-	RealProfit      int     `json:"real_profit"`
+	RealProfit      float64 `json:"real_profit"`
 	MarginMode      string  `json:"margin_mode"`
 	MarginAccount   string  `json:"margin_account"`
 	ReduceOnly      int     `json:"reduce_only"`

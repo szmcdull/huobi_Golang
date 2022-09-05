@@ -31,6 +31,6 @@ type HistoryOrder struct {
 	MarginAccount   string  `json:"margin_account"`
 	UpdateTime      int64   `json:"update_time"`
 	IsTpsl          int     `json:"is_tpsl"`
-	RealProfit      int     `json:"real_profit"`
+	RealProfit      float64 `json:"real_profit"`
 	ReduceOnly      int     `json:"reduce_only"`
 }
