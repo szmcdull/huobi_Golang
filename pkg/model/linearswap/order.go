@@ -32,6 +32,6 @@ type Order struct {
 	MarginAccount   string   `json:"margin_account"`
 	MarginMode      string   `json:"margin_mode"`
 	IsTpsl          int      `json:"is_tpsl"`
-	RealProfit      int      `json:"real_profit"`
+	RealProfit      float64  `json:"real_profit"`
 	ReduceOnly      int      `json:"reduce_only"`
 }
