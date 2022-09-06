@@ -34,7 +34,7 @@ type DetailInformationOfOrder struct {
 	Fee             float64  `json:"fee"`
 	OrderId         int64    `json:"order_id"`
 	OrderIdStr      string   `json:"order_id_str"`
-	ClientOrderId   *string  `json:"client_order_id"`
+	ClientOrderId   *int64   `json:"client_order_id"`
 	OrderType       string   `json:"order_type"`
 	Status          int      `json:"status"`
 	TradeAvgPrice   float64  `json:"trade_avg_price"`
