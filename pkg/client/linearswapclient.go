@@ -185,7 +185,7 @@ func (p *LinearSwapClient) GetDetailInformationOfOrder(request *linearswap.GetDe
 	return nil, errors.New(body)
 }
 
-func (p *LinearSwapClient) GetHistoryOrdersNew(request *linearswap.GetHistoryOrdersV3Request) (resp *linearswap.GetHistoryOrdersV3Data, err error) {
+func (p *LinearSwapClient) GetHistoryOrdersV3(request *linearswap.GetHistoryOrdersV3Request) (resp *linearswap.GetHistoryOrdersV3Data, err error) {
 	var body string
 	if body, err = model.ToJson(request); err != nil {
 		return

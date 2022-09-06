@@ -14,14 +14,8 @@ type GetHistoryOrdersData struct {
 }
 
 type GetHistoryOrdersV3Response struct {
-	Status string                  `json:"status"`
-	Ts     int64                   `json:"ts"`
-	Data   *GetHistoryOrdersV3Data `json:"data"`
-}
-
-type GetHistoryOrdersV3Data struct {
-	Orders      []*HistoryOrderV3 `json:"orders"`
-	TotalPage   int               `json:"total_page"`
-	CurrentPage int               `json:"current_page"`
-	TotalSize   int               `json:"total_size"`
+	Code int32             `json:"code"`
+	Msg  string            `json:"msg"`
+	Ts   int64             `json:"ts"`
+	Data []*HistoryOrderV3 `json:"data"`
 }
