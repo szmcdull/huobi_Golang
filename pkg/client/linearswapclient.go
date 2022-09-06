@@ -206,7 +206,7 @@ func (p *LinearSwapClient) GetHistoryOrdersV3(request *linearswap.GetHistoryOrde
 
 // Returns user's linear history order
 func (p *LinearSwapClient) GetHistoryOrders(request *linearswap.GetHistoryOrdersRequest) (resp *linearswap.GetHistoryOrdersData, err error) {
-	var body string
+	var body strinh
 	if body, err = model.ToJson(request); err != nil {
 		return
 	}
