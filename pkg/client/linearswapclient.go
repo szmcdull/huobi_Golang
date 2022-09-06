@@ -185,6 +185,25 @@ func (p *LinearSwapClient) GetDetailInformationOfOrder(request *linearswap.GetDe
 	return nil, errors.New(body)
 }
 
+func (p *LinearSwapClient) GetHistoryOrdersNew(request *linearswap.GetHistoryOrdersV3Request) (resp *linearswap.GetHistoryOrdersV3Data, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v3/swap_cross_hisorders", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetHistoryOrdersV3Response)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
 // Returns user's linear history order
 func (p *LinearSwapClient) GetHistoryOrders(request *linearswap.GetHistoryOrdersRequest) (resp *linearswap.GetHistoryOrdersData, err error) {
 	var body string
