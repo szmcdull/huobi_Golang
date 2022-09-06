@@ -13,7 +13,7 @@ type GetHistoryOrdersRequest struct {
 }
 
 type GetHistoryOrdersV3Request struct {
-	Contract  string  `json:"contract_code"`
+	Contract  string  `json:"contract"`
 	TradeType int     `json:"trade_type"`
 	Status    string  `json:"status"`
 	Type      int     `json:"type"`
