@@ -185,7 +185,7 @@ func (p *LinearSwapClient) GetDetailInformationOfOrder(request *linearswap.GetDe
 	return nil, errors.New(body)
 }
 
-func (p *LinearSwapClient) GetHistoryOrdersV3(request *linearswap.GetHistoryOrdersV3Request) (resp *linearswap.GetHistoryOrdersV3Data, err error) {
+func (p *LinearSwapClient) GetHistoryOrdersV3(request *linearswap.GetHistoryOrdersV3Request) (resp []*linearswap.HistoryOrderV3, err error) {
 	var body string
 	if body, err = model.ToJson(request); err != nil {
 		return
@@ -198,7 +198,7 @@ func (p *LinearSwapClient) GetHistoryOrdersV3(request *linearswap.GetHistoryOrde
 	if err = json.Unmarshal([]byte(body), result); err != nil {
 		return
 	}
-	if result.Status == "ok" && result.Data != nil {
+	if result.Code == 200 && result.Data != nil {
 		return result.Data, nil
 	}
 	return nil, errors.New(body)
