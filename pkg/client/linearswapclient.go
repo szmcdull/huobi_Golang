@@ -244,6 +244,26 @@ func (p *LinearSwapClient) GetHistoryOrdersViaMultipleFields(request *linearswap
 	return nil, errors.New(body)
 }
 
+// Returns user's linear history order via multiple fields uses V3 API
+func (p *LinearSwapClient) GetHistoryOrdersViaMultipleFieldsV3(request *linearswap.GetHistoryOrdersViaMultipleFieldsV3Request) (resp []*linearswap.HistoryOrderMultipleFieldsV3, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v3/swap_cross_hisorders_exact", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetHistoryOrdersViaMultipleFieldsV3Response)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Code == 200 && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
 // Cancel user's linear swap order
 func (p *LinearSwapClient) CancelOrder(request *linearswap.CancelOrderRequest) (resp *linearswap.CancelOrderResult, err error) {
 	var body string

@@ -13,3 +13,16 @@ type GetHistoryOrdersViaMultipleFieldsRequest struct {
 	Size           int    `json:"size"`
 	Direct         string `json:"direct"`
 }
+
+type GetHistoryOrdersViaMultipleFieldsV3Request struct {
+	Contract  string  `json:"contract"`
+	TradeType int     `json:"trade_type"`
+	Status    string  `json:"status"`
+	Type      int     `json:"type"`
+	Pair      *string `json:"pair"`
+	PriceType *string `json:"price_type"`
+	StartTime *int64  `json:"start_time"`
+	EndTime   *int64  `json:"end_time"`
+	Direct    *string `json:"direct"`
+	FromId    *int64  `json:"from_id"`
+}
