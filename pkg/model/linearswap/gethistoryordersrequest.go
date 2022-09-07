@@ -17,9 +17,9 @@ type GetHistoryOrdersV3Request struct {
 	TradeType int     `json:"trade_type"`
 	Status    string  `json:"status"`
 	Type      int     `json:"type"`
-	Pair      *string `json:"pair"`
-	StartTime *int64  `json:"start_time"`
-	EndTime   *int64  `json:"end_time"`
-	Direct    *string `json:"direct"`
-	FromId    *int64  `json:"from_id"`
+	Pair      *string `json:"pair,omitempty"`
+	StartTime *int64  `json:"start_time,omitempty"`
+	EndTime   *int64  `json:"end_time,omitempty"`
+	Direct    *string `json:"direct,omitempty"`
+	FromId    *int64  `json:"from_id,omitempty"`
 }
