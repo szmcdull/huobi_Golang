@@ -124,7 +124,7 @@ func (p *LinearSwapClient) QueryAccountFinancialRecordsViaMultipleFields(request
 	return nil, errors.New(postResp)
 }
 
-func (p *LinearSwapClient) QueryAccountFinancialRecordsViaMultipleFieldsV3(request *linearswap.QueryAccountFinancialRecordsViaMultipleFieldsRequest) (resp []*linearswap.CrossLinearSwapAccountFinancialRecordV3, err error) {
+func (p *LinearSwapClient) QueryAccountFinancialRecordsViaMultipleFieldsV3(request *linearswap.CrossLinearSwapAccountFinancialRecordsV3Request) (resp []*linearswap.CrossLinearSwapAccountFinancialRecordV3, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
 		return
