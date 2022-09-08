@@ -19,3 +19,23 @@ type QueryAccountFinancialRecordsViaMultipleFieldsRequest struct {
 	Size          int32   `json:"size"`
 	Direct        *string `json:"direct"`
 }
+
+type CrossLinearSwapAccountFinancialRecordsV3Request struct {
+	Contract  *string `json:"contract"`
+	MarAcct   string  `json:"mar_acct"`
+	Type      *string `json:"type"`
+	StartTime *int64  `json:"start_time"`
+	EndTime   *int64  `json:"end_time"`
+	Direct    *string `json:"direct"`
+	FromId    *int    `json:"from_id"`
+}
+
+type QueryAccountFinancialRecordsViaMultipleFieldsV3Request struct {
+	Contract  string `json:"contract"`
+	MarAcct   string `json:"mar_acct"`
+	Type      string `json:"type"`
+	StartTime int64  `json:"start_time"`
+	EndTime   int64  `json:"end_time"`
+	Direct    string `json:"direct"`
+	FromId    int64  `json:"from_id"`
+}

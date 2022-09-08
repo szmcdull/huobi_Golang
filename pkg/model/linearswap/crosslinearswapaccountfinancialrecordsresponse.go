@@ -23,3 +23,10 @@ type CrossLinearSwapAccountFinancialRecordsViaMultipleFieldsData struct {
 	RemainSize       int                                      `json:"remain_size"`
 	NextId           interface{}                              `json:"next_id"`
 }
+
+type CrossLinearSwapAccountFinancialRecordsV3Response struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+	Ts   int64  `json:"ts"`
+	Data []*CrossLinearSwapAccountFinancialRecordV3
+}

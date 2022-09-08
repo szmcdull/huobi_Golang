@@ -83,6 +83,27 @@ func (p *LinearSwapClient) QueryAccountFinancialRecords(request *linearswap.Cros
 	return nil, errors.New(postResp)
 }
 
+// Returns user's linear financial records via API v3.
+func (p *LinearSwapClient) QueryAccountFinancialRecordsV3(request *linearswap.CrossLinearSwapAccountFinancialRecordsV3Request) (resp []*linearswap.CrossLinearSwapAccountFinancialRecordV3, err error) {
+	var postBody string
+	if postBody, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v3/swap_financial_record", nil)
+	var postResp string
+	if postResp, err = internal.HttpPost(url, postBody); err != nil {
+		return
+	}
+	result := new(linearswap.CrossLinearSwapAccountFinancialRecordsV3Response)
+	if err = json.Unmarshal([]byte(postResp), result); err != nil {
+		return
+	}
+	if result.Code == 200 && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(postResp)
+}
+
 func (p *LinearSwapClient) QueryAccountFinancialRecordsViaMultipleFields(request *linearswap.QueryAccountFinancialRecordsViaMultipleFieldsRequest) (resp *linearswap.CrossLinearSwapAccountFinancialRecordsViaMultipleFieldsData, err error) {
 	var postBody string
 	if postBody, err = model.ToJson(request); err != nil {
@@ -98,6 +119,26 @@ func (p *LinearSwapClient) QueryAccountFinancialRecordsViaMultipleFields(request
 		return
 	}
 	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(postResp)
+}
+
+func (p *LinearSwapClient) QueryAccountFinancialRecordsViaMultipleFieldsV3(request *linearswap.QueryAccountFinancialRecordsViaMultipleFieldsRequest) (resp []*linearswap.CrossLinearSwapAccountFinancialRecordV3, err error) {
+	var postBody string
+	if postBody, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v3/swap_financial_record_exact", nil)
+	var postResp string
+	if postResp, err = internal.HttpPost(url, postBody); err != nil {
+		return
+	}
+	result := new(linearswap.CrossLinearSwapAccountFinancialRecordsV3Response)
+	if err = json.Unmarshal([]byte(postResp), result); err != nil {
+		return
+	}
+	if result.Code == 200 && result.Data != nil {
 		return result.Data, nil
 	}
 	return nil, errors.New(postResp)
