@@ -51,7 +51,7 @@ type HistoryOrderV3 struct {
 	CreateDate      int64   `json:"create_date"`
 	UpdateTime      int64   `json:"update_time"`
 	OrderSource     string  `json:"order_source"`
-	OrderPriceType  string  `json:"order_price_type"`
+	OrderPriceType  int64   `json:"order_price_type"`
 	MarginAsset     string  `json:"margin_asset"`
 	MarginFrozen    float64 `json:"margin_frozen"`
 	Profit          float64 `json:"profit"`
