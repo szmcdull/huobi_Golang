@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"errors"
+
 	"github.com/huobirdcenter/huobi_golang/internal"
 	"github.com/huobirdcenter/huobi_golang/internal/requestbuilder"
 	"github.com/huobirdcenter/huobi_golang/pkg/model"
@@ -360,5 +361,28 @@ func (p *LinearSwapClient) SwitchPositionMode(request *linearswap.SwitchPosition
 	if result.Status == "ok" && result.Data != nil {
 		return result.Data, nil
 	}
+	return nil, errors.New(body)
+}
+
+func (p *LinearSwapClient) SwapTradingFee(request *linearswap.SwapTradingFeeRequest) (resp []*linearswap.SwapTradingFee, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_fee", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	result := new(linearswap.SwapTradingFeeResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+
 	return nil, errors.New(body)
 }
