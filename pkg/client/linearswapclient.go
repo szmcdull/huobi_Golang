@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"errors"
+	"strconv"
 
 	"github.com/huobirdcenter/huobi_golang/internal"
 	"github.com/huobirdcenter/huobi_golang/internal/requestbuilder"
@@ -387,14 +388,34 @@ func (p *LinearSwapClient) SwapTradingFee(request *linearswap.SwapTradingFeeRequ
 	return nil, errors.New(body)
 }
 
-func (p *LinearSwapClient) GetLiquidationOrders(request *linearswap.GetLiquidationOrdersRequest) (resp []*linearswap.LiquidationOrder, err error) {
-	var body string
-	if body, err = model.ToJson(request); err != nil {
-		return
+func (p *LinearSwapClient) GetLiquidationOrders(req *linearswap.GetLiquidationOrdersRequest) (resp []*linearswap.LiquidationOrder, err error) {
+	request := new(model.GetRequest).Init()
+	request.AddParam("contract", req.Contract)
+	request.AddParam("trade_type", strconv.Itoa(req.TradeType))
+
+	if req.Pair != nil {
+		request.AddParam("pair", *req.Pair)
 	}
 
-	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v3/swap_liquidation_orders", nil)
-	if body, err = internal.HttpPost(url, body); err != nil {
+	if req.Direct != nil {
+		request.AddParam("direct", *req.Direct)
+	}
+
+	if req.EndTime != nil {
+		request.AddParam("end_time", strconv.FormatInt(*req.EndTime, 10))
+	}
+
+	if req.FromId != nil {
+		request.AddParam("from_id", strconv.FormatInt(*req.FromId, 10))
+	}
+
+	if req.StartTime != nil {
+		request.AddParam("start_time", strconv.FormatInt(*req.StartTime, 10))
+	}
+
+	url := p.privateUrlBuilder.Build("GET", "/linear-swap-api/v3/swap_liquidation_orders", request)
+	body, err := internal.HttpGet(url)
+	if err != nil {
 		return
 	}
 
