@@ -386,3 +386,26 @@ func (p *LinearSwapClient) SwapTradingFee(request *linearswap.SwapTradingFeeRequ
 
 	return nil, errors.New(body)
 }
+
+func (p *LinearSwapClient) GetLiquidationOrders(request *linearswap.GetLiquidationOrdersRequest) (resp []*linearswap.LiquidationOrder, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v3/swap_liquidation_orders", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	response := new(linearswap.GetLiquidationOrdersResponse)
+	if err = json.Unmarshal([]byte(body), response); err != nil {
+		return
+	}
+
+	if response.Code == 200 && response.Data != nil {
+		return response.Data, nil
+	}
+
+	return nil, errors.New(body)
+}
