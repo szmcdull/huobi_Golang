@@ -12,7 +12,7 @@ type DetailInformationOfOrder struct {
 	BusinessType    string   `json:"business_type"`
 	Symbol          string   `json:"symbol"`
 	ContractCode    string   `json:"contract_code"`
-	InstrumentPrice int      `json:"instrument_price"`
+	InstrumentPrice float64  `json:"instrument_price"`
 	FinalInterest   int      `json:"final_interest"`
 	AdjustValue     int      `json:"adjust_value"`
 	LeverRate       int      `json:"lever_rate"`
