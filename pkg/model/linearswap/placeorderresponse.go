@@ -1,9 +1,11 @@
 package linearswap
 
 type PlaceOrderResponse struct {
-	Status string          `json:"status"`
-	Ts     int64           `json:"ts"`
-	Data   *PlaceOrderData `json:"data"`
+	Status  string          `json:"status"`
+	Ts      int64           `json:"ts"`
+	ErrCode *int32          `json:"err_code"`
+	ErrMsg  *string         `json:"err_msg"`
+	Data    *PlaceOrderData `json:"data"`
 }
 
 type PlaceOrderData struct {

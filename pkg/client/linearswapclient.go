@@ -208,6 +208,44 @@ func (p *LinearSwapClient) GetInformationOfOrder(request *linearswap.GetInformat
 	return nil, errors.New(body)
 }
 
+func (p *LinearSwapClient) GetInformationOfOpenTriggerOrder(request *linearswap.GetTriggerOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_trigger_openorders", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetTriggerOrdersResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
+func (p *LinearSwapClient) GetHistoryTriggerOrders(request *linearswap.GetTriggerOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_trigger_hisorders", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.GetTriggerOrdersResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
 // Returns detail information of user's linear order
 func (p *LinearSwapClient) GetDetailInformationOfOrder(request *linearswap.GetDetailInformationOfOrderRequest) (resp *linearswap.DetailInformationOfOrder, err error) {
 	var body string
@@ -327,12 +365,50 @@ func (p *LinearSwapClient) CancelOrder(request *linearswap.CancelOrderRequest) (
 	return nil, errors.New(body)
 }
 
+func (p *LinearSwapClient) CancelTriggerOrder(request *linearswap.CancelTriggerOrderRequest) (resp *linearswap.CancelOrderResult, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_trigger_cancell", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.CancelOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
 func (p *LinearSwapClient) PlaceOrder(request *linearswap.PlaceOrderRequest) (resp *linearswap.PlaceOrderData, err error) {
 	var body string
 	if body, err = model.ToJson(request); err != nil {
 		return
 	}
 	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_order", nil)
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+	result := new(linearswap.PlaceOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+	return nil, errors.New(body)
+}
+
+func (p *LinearSwapClient) PlaceTriggerOrder(request *linearswap.PlaceTriggerOrderRequest) (resp *linearswap.PlaceOrderData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_trigger_order", nil)
 	if body, err = internal.HttpPost(url, body); err != nil {
 		return
 	}
