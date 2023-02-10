@@ -227,7 +227,7 @@ func (p *LinearSwapClient) GetInformationOfOpenTriggerOrder(request *linearswap.
 	return nil, errors.New(body)
 }
 
-func (p *LinearSwapClient) GetHistoryTriggerOrders(request *linearswap.GetTriggerOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
+func (p *LinearSwapClient) GetHistoryTriggerOrders(request *linearswap.GetHistoryOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
 	var body string
 	if body, err = model.ToJson(request); err != nil {
 		return
