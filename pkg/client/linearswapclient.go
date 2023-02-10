@@ -370,7 +370,7 @@ func (p *LinearSwapClient) CancelTriggerOrder(request *linearswap.CancelTriggerO
 	if body, err = model.ToJson(request); err != nil {
 		return
 	}
-	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_trigger_cancell", nil)
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_trigger_cancel", nil)
 	if body, err = internal.HttpPost(url, body); err != nil {
 		return
 	}
