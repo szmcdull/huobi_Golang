@@ -422,6 +422,31 @@ func (p *LinearSwapClient) PlaceTriggerOrder(request *linearswap.PlaceTriggerOrd
 	return nil, errors.New(body)
 }
 
+func (p *LinearSwapClient) PlaceTPSLOrder(request *linearswap.PlaceTPSLOrderRequest) (resp *linearswap.PlaceTPSLOrderResponseData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_tpsl_order", nil)
+
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	result := new(linearswap.PlaceTPSLOrderResponse)
+
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+
+	return nil, errors.New(body)
+}
+
 func (p *LinearSwapClient) SwitchPositionMode(request *linearswap.SwitchPositionModeRequest) (resp []*linearswap.PositionMode, err error) {
 	var body string
 	if body, err = model.ToJson(request); err != nil {
