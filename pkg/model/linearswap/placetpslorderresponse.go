@@ -14,6 +14,6 @@ type PlaceTPSLOrderResponseData struct {
 }
 
 type TPSLOrderIdentifier struct {
-	OrderId    int64  `json:"order_id"`
+	OrderId    uint64 `json:"order_id"`
 	OrderIdStr string `json:"order_id_str"`
 }

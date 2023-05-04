@@ -227,6 +227,31 @@ func (p *LinearSwapClient) GetInformationOfOpenTriggerOrder(request *linearswap.
 	return nil, errors.New(body)
 }
 
+func (p *LinearSwapClient) GetInformationOfOpenTPSLOrder(request *linearswap.GetTriggerOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_tpsl_openorders", nil)
+
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	result := new(linearswap.GetTriggerOrdersResponse)
+
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+
+	return nil, errors.New(body)
+}
+
 func (p *LinearSwapClient) GetHistoryTriggerOrders(request *linearswap.GetHistoryOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
 	var body string
 	if body, err = model.ToJson(request); err != nil {
@@ -243,6 +268,55 @@ func (p *LinearSwapClient) GetHistoryTriggerOrders(request *linearswap.GetHistor
 	if result.Status == "ok" && result.Data != nil {
 		return result.Data, nil
 	}
+	return nil, errors.New(body)
+}
+
+func (p *LinearSwapClient) GetHistoryTPSLOrders(request *linearswap.GetHistoryOrdersRequest) (order *linearswap.GetTriggerOrdersData, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "linear-swap-api/v1/swap_cross_tpsl_hisorders", nil)
+
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	result := new(linearswap.GetTriggerOrdersResponse)
+
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+
+	return nil, errors.New(body)
+}
+
+func (p *LinearSwapClient) GetRelatedToPositionTPSLOrder(request *linearswap.GetRelatedToPositionTPSLOrderRequest) (resp *linearswap.TriggerOrder, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_relation_tpsl_order", nil)
+
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	result := new(linearswap.GetRelatedToPositionTPSLOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+
 	return nil, errors.New(body)
 }
 
@@ -381,6 +455,30 @@ func (p *LinearSwapClient) CancelTriggerOrder(request *linearswap.CancelTriggerO
 	if result.Status == "ok" && result.Data != nil {
 		return result.Data, nil
 	}
+	return nil, errors.New(body)
+}
+
+func (p *LinearSwapClient) CancelTPSLOrder(request *linearswap.CancelTriggerOrderRequest) (resp *linearswap.CancelOrderResult, err error) {
+	var body string
+	if body, err = model.ToJson(request); err != nil {
+		return
+	}
+
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_tpsl_cancel", nil)
+
+	if body, err = internal.HttpPost(url, body); err != nil {
+		return
+	}
+
+	result := new(linearswap.CancelOrderResponse)
+	if err = json.Unmarshal([]byte(body), result); err != nil {
+		return
+	}
+
+	if result.Status == "ok" && result.Data != nil {
+		return result.Data, nil
+	}
+
 	return nil, errors.New(body)
 }
 
