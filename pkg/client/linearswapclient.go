@@ -277,7 +277,7 @@ func (p *LinearSwapClient) GetHistoryTPSLOrders(request *linearswap.GetHistoryOr
 		return
 	}
 
-	url := p.privateUrlBuilder.Build("POST", "linear-swap-api/v1/swap_cross_tpsl_hisorders", nil)
+	url := p.privateUrlBuilder.Build("POST", "/linear-swap-api/v1/swap_cross_tpsl_hisorders", nil)
 
 	if body, err = internal.HttpPost(url, body); err != nil {
 		return
