@@ -210,7 +210,7 @@ func (p *SubUserClient) SubUserTransfer(request subuser.SubUserTransferRequest) 
 		return 0, jsonErr
 	}
 
-	if result.Status != "ok" && result.Data != nil {
+	if result.Status == "ok" && result.Data != nil {
 		return *result.Data, nil
 	}
 
