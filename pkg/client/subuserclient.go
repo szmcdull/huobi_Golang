@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
+
 	"github.com/huobirdcenter/huobi_golang/internal"
 	"github.com/huobirdcenter/huobi_golang/internal/requestbuilder"
 	"github.com/huobirdcenter/huobi_golang/pkg/model"
 	"github.com/huobirdcenter/huobi_golang/pkg/model/account"
 	"github.com/huobirdcenter/huobi_golang/pkg/model/subuser"
 	"github.com/huobirdcenter/huobi_golang/pkg/model/wallet"
-	"strconv"
-	"strings"
 )
 
 // Responsible to operate wallet
@@ -193,22 +193,28 @@ func (p *SubUserClient) SetSubUserTransferability(request subuser.SetSubUserTran
 }
 
 // Transfer asset between parent and sub account
-func (p *SubUserClient) SubUserTransfer(request subuser.SubUserTransferRequest) (string, error) {
+func (p *SubUserClient) SubUserTransfer(request subuser.SubUserTransferRequest) (int64, error) {
 	postBody, jsonErr := model.ToJson(request)
 	if jsonErr != nil {
-		return "", jsonErr
+		return 0, jsonErr
 	}
 
 	url := p.privateUrlBuilder.Build("POST", "/v1/subuser/transfer", nil)
 	postResp, postErr := internal.HttpPost(url, postBody)
 	if postErr != nil {
-		return "", postErr
+		return 0, postErr
 	}
-	if strings.Contains(postResp, "data") {
-		return postResp, nil
-	} else {
-		return "", errors.New(postResp)
+
+	result := new(subuser.SubUserTransferResponse)
+	if jsonErr = json.Unmarshal([]byte(postResp), result); jsonErr != nil {
+		return 0, jsonErr
 	}
+
+	if result.Status != "ok" && result.Data != nil {
+		return *result.Data, nil
+	}
+
+	return 0, errors.New(postResp)
 }
 
 // Parent user query sub user deposit address of corresponding chain, for a specific crypto currency (except IOTA)

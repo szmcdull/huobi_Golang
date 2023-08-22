@@ -8,3 +8,10 @@ type SubUserTransferRequest struct {
 	Amount   decimal.Decimal `json:"amount"`
 	Type     string          `json:"type"`
 }
+
+type SubUserTransferResponse struct {
+	Status  string `json:"status"`
+	ErrCode string `json:"err-code"`
+	ErrMsg  string `json:"err-msg"`
+	Data    *int64 `json:"data"`
+}
