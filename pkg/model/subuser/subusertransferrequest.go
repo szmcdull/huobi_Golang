@@ -1,12 +1,10 @@
 package subuser
 
-import "github.com/shopspring/decimal"
-
 type SubUserTransferRequest struct {
-	SubUid   int64           `json:"sub-uid"`
-	Currency string          `json:"currency"`
-	Amount   decimal.Decimal `json:"amount"`
-	Type     string          `json:"type"`
+	SubUid   int64   `json:"sub-uid"`
+	Currency string  `json:"currency"`
+	Amount   float64 `json:"amount"`
+	Type     string  `json:"type"`
 }
 
 type SubUserTransferResponse struct {
