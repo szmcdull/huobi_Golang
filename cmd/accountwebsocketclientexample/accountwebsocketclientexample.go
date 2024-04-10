@@ -2,11 +2,11 @@ package accountwebsocketclientexample
 
 import (
 	"fmt"
-	"github.com/huobirdcenter/huobi_golang/config"
-	"github.com/huobirdcenter/huobi_golang/logging/applogger"
-	"github.com/huobirdcenter/huobi_golang/pkg/client/accountwebsocketclient"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/account"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/auth"
+	"github.com/szmcdull/huobi_golang/config"
+	"github.com/szmcdull/huobi_golang/logging/applogger"
+	"github.com/szmcdull/huobi_golang/pkg/client/accountwebsocketclient"
+	"github.com/szmcdull/huobi_golang/pkg/model/account"
+	"github.com/szmcdull/huobi_golang/pkg/model/auth"
 )
 
 func RunAllExamples() {

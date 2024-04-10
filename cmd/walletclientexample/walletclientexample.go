@@ -1,11 +1,11 @@
 package walletclientexample
 
 import (
-	"github.com/huobirdcenter/huobi_golang/config"
-	"github.com/huobirdcenter/huobi_golang/logging/applogger"
-	"github.com/huobirdcenter/huobi_golang/pkg/client"
-	"github.com/huobirdcenter/huobi_golang/pkg/model"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/wallet"
+	"github.com/szmcdull/huobi_golang/config"
+	"github.com/szmcdull/huobi_golang/logging/applogger"
+	"github.com/szmcdull/huobi_golang/pkg/client"
+	"github.com/szmcdull/huobi_golang/pkg/model"
+	"github.com/szmcdull/huobi_golang/pkg/model/wallet"
 )
 
 func RunAllExamples() {

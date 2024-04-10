@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/huobirdcenter/huobi_golang/internal"
-	"github.com/huobirdcenter/huobi_golang/internal/requestbuilder"
-	"github.com/huobirdcenter/huobi_golang/pkg/model"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/account"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/subuser"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/wallet"
+	"github.com/szmcdull/huobi_golang/internal"
+	"github.com/szmcdull/huobi_golang/internal/requestbuilder"
+	"github.com/szmcdull/huobi_golang/pkg/model"
+	"github.com/szmcdull/huobi_golang/pkg/model/account"
+	"github.com/szmcdull/huobi_golang/pkg/model/subuser"
+	"github.com/szmcdull/huobi_golang/pkg/model/wallet"
 )
 
 // Responsible to operate wallet

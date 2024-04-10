@@ -2,7 +2,7 @@ package requestbuilder
 
 import (
 	"encoding/json"
-	"github.com/huobirdcenter/huobi_golang/internal/model"
+	"github.com/szmcdull/huobi_golang/internal/model"
 	"testing"
 	"time"
 )

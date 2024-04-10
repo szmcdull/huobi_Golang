@@ -5,10 +5,10 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/huobirdcenter/huobi_golang/internal"
-	"github.com/huobirdcenter/huobi_golang/internal/requestbuilder"
-	"github.com/huobirdcenter/huobi_golang/pkg/model"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/linearswap"
+	"github.com/szmcdull/huobi_golang/internal"
+	"github.com/szmcdull/huobi_golang/internal/requestbuilder"
+	"github.com/szmcdull/huobi_golang/pkg/model"
+	"github.com/szmcdull/huobi_golang/pkg/model/linearswap"
 )
 
 // Responsible to operate linear swap
